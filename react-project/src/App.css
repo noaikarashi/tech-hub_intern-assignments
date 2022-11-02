@@ -2,6 +2,16 @@
   text-align: center;
 }
 
+.inputText {
+  padding: 1%;
+}
+
+.submitButton {
+  padding: 1% 2%;
+  cursor: pointer;
+}
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
