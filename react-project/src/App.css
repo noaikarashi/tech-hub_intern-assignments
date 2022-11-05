@@ -1,48 +1,107 @@
-.App {
-  text-align: center;
+/* チャットアプリ用 */
+
+.chat-header {
+  text-align: left;
+  margin: 3%;
+}
+
+.msg-content {
+  padding: 15%;
 }
 
 .inputText {
   padding: 1%;
 }
 
+
 .submitButton {
   padding: 1% 2%;
   cursor: pointer;
 }
 
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.chat-form {
+  position: absolute;
+  right: 3%;
+  bottom: 3%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/*吹き出し*/
+.balloon_l,
+.balloon_r {
+  margin: 30px 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  /*縦位置を上揃え*/
+  /*   align-items: center; */
+  /*縦位置を真ん中揃え*/
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.balloon_r {
+  justify-content: flex-end;
+}
+
+.faceicon img {
+  width: 80px;
+  /*任意のサイズ*/
+  height: auto;
+}
+
+.balloon_r .faceicon {
+  margin-left: 25px;
+}
+
+.balloon_l .faceicon {
+  margin-right: 25px;
+}
+
+.balloon_r .faceicon {
+  order: 2 !important;
+}
+
+.says {
+  max-width: 500px;
+  /*最大幅は任意*/
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  padding: 17px 13px 15px 18px;
+  border-radius: 12px;
+  background: #99dddd;
+  /*色は任意*/
+  box-sizing: border-box;
+  margin: 0 !important;
+  line-height: 1.5;
+  /*   align-items: center; */
+}
+
+.says p {
+  margin: 8px 0 0 !important;
+}
+
+.says p:first-child {
+  margin-top: 0 !important;
+}
+
+.says:after {
+  content: "";
+  position: absolute;
+  border: 10px solid transparent;
+  /*   margin-top:-3px;  */
+}
+
+.balloon_l .says:after {
+  left: -26px;
+  border-right: 22px solid #99dddd;
+}
+
+.balloon_r .says:after {
+  right: -26px;
+  border-left: 22px solid #99dddd;
+}
+
+
+.App {
+  text-align: center;
 }

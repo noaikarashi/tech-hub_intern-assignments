@@ -1,12 +1,35 @@
-import React, { useState } from 'react';
-// import { idText } from 'typescript';
+import React, {useState, useMemo, useEffect} from 'react';
+import db from './firebaseConfig';
 import './App.css';
+import { collection, doc, getDocs, getDoc, query } from 'firebase/firestore';
 
 function App() {
-  const [ inputValue, setInputValue ] = useState("");
-  const [ todos, setTodos ] = useState<Todo[]>([]);
 
-  type  Todo = {
+  useEffect(() => {
+    // const res = getDocs(query(collection(db, 'users')))
+    // console.log(res.then(res => {console.log(res.docs)} ))
+    // const Ref = db.collection('users')
+    // const docSnap = getDoc(docRef);
+    // if (docSnap.exists()) {
+    //   console.log("Doc data:", docSnap.data());
+    // } else {
+    //   console.log("No such Doc");
+    // }
+  },[])
+  useEffect(() => {
+    (async()=>{
+      const snapshot = await getDocs(collection(db, 'users'))
+      snapshot.forEach((doc)=> {
+        console.log(doc.id, doc.data)
+      })
+    })()
+
+  }, [])
+
+  const [inputValue, setInputValue] = useState("");
+  const [todos, setTodos] = useState<Todo[]>([]);
+
+  type Todo = {
     inputValue: string;
     id: number;
     checked: boolean;
@@ -26,7 +49,7 @@ function App() {
       checked: false,
     };
 
-    setTodos([ newTodo, ...todos ]);
+    setTodos([newTodo, ...todos]);
     setInputValue("")
   };
 
@@ -56,18 +79,10 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div>
       <div>
-        <h1>ToDo List</h1>
-        <form onSubmit={(e) => handleSubmit(e) }>
-        <input
-          type="text"
-          onChange={(e) => handleChage(e) }
-          className="inputText"
-        />
-        <input type="submit" value="送信" className="submitButton" />
-        </form>
-        <ul>
+        <h2 className='chat-header'>チャットルーム</h2>
+        <ul className='msg-content'>
           {todos.map((todo) => (
             <li key={todo.id}>
               <input
@@ -79,12 +94,20 @@ function App() {
               />
               <input
                 type="checkbox"
-                onChange={(e) => handleChecked(todo.id, todo.checked) }
+                onChange={(e) => handleChecked(todo.id, todo.checked)}
               />
-              <button onClick={ () => handleDelete(todo.id) }>削除</button>
+              <button onClick={() => handleDelete(todo.id)}>削除</button>
             </li>
           ))}
         </ul>
+        <form className='chat-form' onSubmit={(e) => handleSubmit(e)}>
+          <input
+            type="text"
+            onChange={(e) => handleChage(e)}
+            className="inputText"
+          />
+          <input type="submit" value="送信" className="submitButton" />
+        </form>
       </div>
     </div>
   );
