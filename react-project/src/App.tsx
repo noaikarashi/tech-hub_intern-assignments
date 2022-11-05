@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import { idText } from 'typescript';
+// import db from './firebaseConfig';
 import './App.css';
 
 function App() {
