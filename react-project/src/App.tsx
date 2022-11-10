@@ -1,7 +1,9 @@
 import React, {useState, useMemo, useEffect} from 'react';
-import db from './firebaseConfig';
+// import db from './firebaseConfig';
 import './App.css';
-import { collection, doc, getDocs, getDoc, query } from 'firebase/firestore';
+// import { collection, doc, getDocs, getDoc, query } from 'firebase/firestore';
+import Signin from './component/signin';
+import { Link } from "react-router-dom";
 
 function App() {
 
@@ -16,15 +18,17 @@ function App() {
     //   console.log("No such Doc");
     // }
   },[])
-  useEffect(() => {
-    (async()=>{
-      const snapshot = await getDocs(collection(db, 'users'))
-      snapshot.forEach((doc)=> {
-        console.log(doc.id, doc.data)
-      })
-    })()
+  // useEffect(() => {
+  //   (async()=>{
+  //     const snapshot = await getDocs(collection(db, 'users'))
+  //     snapshot.forEach((doc)=> {
+  //       console.log(doc.id, doc.data)
+  //     })
+  //   })()
 
-  }, [])
+  // }, [])
+
+  const [name, setName] = useState('');
 
   const [inputValue, setInputValue] = useState("");
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -79,16 +83,16 @@ function App() {
   };
 
   return (
-    <div>
+    <div className='chat-background'>
+      <h2 className='chat-header'>チャットルーム</h2>
       <div>
-        <h2 className='chat-header'>チャットルーム</h2>
-        <ul className='msg-content'>
+        <ul className='balloon_l'>
           {todos.map((todo) => (
             <li key={todo.id}>
               <input
                 type="text"
                 onChange={(e) => handleEdit(todo.id, e.target.value)}
-                className="inputText"
+                className="says"
                 value={todo.inputValue}
                 disabled={todo.checked}
               />
