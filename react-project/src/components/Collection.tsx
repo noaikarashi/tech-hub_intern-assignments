@@ -4,8 +4,7 @@ import { db } from "../firebaseConfig"
 export interface Message {
   text: string;
   createdAt: Timestamp;
-  // photoURL: string;
-  // uid: string;
+  uid: string;
 }
 
 const messageConverter = {
